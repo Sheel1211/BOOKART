@@ -20,13 +20,17 @@ const Header = () => {
   //   formSearch.classList.toggle("hidden");
   // });
 
-  const [mobile, isMobile] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
       <div className="w-full min-h-screen text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
         <nav className="flex justify-between items-center py-8 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24">
-          <button  className="sidebar-open block md:hidden relative z-30 focus:outline-none transform  -translate-x-1/2 -translate-y-1/2 active:scale-75 transition-transform">
+          <button onClick={toggleMenu} className="sidebar-open block md:hidden relative z-30 focus:outline-none transform  -translate-x-1/2 -translate-y-1/2 active:scale-75 transition-transform">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="btn-open h-5 w-5 transform transition duration-500 ease-in-out"
@@ -55,7 +59,7 @@ const Header = () => {
           <a href=" " className="text-3xl md:text-4xl font-bold tracking-wide">
             Book<span className="text-yellow-500">Art</span>
           </a>
-          <div className="menu-resposive hidden fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 ">
+          <div className={`${isOpen ?"hidden": "block"} menu-resposive fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 `}>
             <ul className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
               <li className="text-lg md:text-base lg:text-lg font-medium group text-yellow-500">
                 <a href="/">Home</a>
