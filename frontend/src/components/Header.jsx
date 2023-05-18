@@ -20,10 +20,14 @@ const Header = () => {
   //   formSearch.classList.toggle("hidden");
   // });
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const [isSearchOpen, setIsSearchOpen] = useState(true);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
   };
 
   return (
@@ -84,6 +88,7 @@ const Header = () => {
             </ul>
           </div>
           <button
+            onClick={toggleSearch}
             className="search-menu flex justify-center items-center h-12 px-5 font-medium text-gray-100 bg-yellow-500 whitespace-nowrap hover:bg-yellow-600 hover:text-white
     rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500 focus:outline-none"
           >
@@ -102,8 +107,8 @@ const Header = () => {
           </button>
         </nav>
         <div
-          className="search-form hidden flex items-center space-x-4 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24 
-  transform duration-500 transition-all"
+          className={`${isSearchOpen ? "hidden" : "block"} search-form  flex items-center space-x-4 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24 
+  transform duration-500 transition-all`}
         >
           <div className="flex bg-gray-200 p-2 w-full space-x-2 rounded-lg items-center">
             <svg
