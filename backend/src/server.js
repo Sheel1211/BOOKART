@@ -4,13 +4,13 @@ import dotenv from "dotenv";
 
 const app=express();
 
-dotenv.config({
-    path:"./config/config.env"
-})
+// dotenv.config({
+//     path:"./config/config.env"
+// })
 
 connectDatabase();
 
 
-app.listen(process.env.PORT,()=>{
-    console.log(` Server is running at ${process.env.PORT} `);
+app.listen(5000,()=>{
+    console.log(` Server is running at 5000 `);
 })
