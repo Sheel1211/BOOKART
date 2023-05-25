@@ -18,6 +18,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function Copyright(props) {
 
@@ -56,7 +58,7 @@ const Signup = () => {
   const validateFirstName = (e) => {
 
     setFirstName(e.target.value.trim());
-    if (e.target.value.trim() == 0) {
+    if (e.target.value.trim() === 0) {
       setFirstNameError("Please enter your first name");
     }
     else if (e.target.value.trim().length < 4) {
@@ -70,7 +72,7 @@ const Signup = () => {
   const validateLastName = (e) => {
     setLastName(e.target.value.trim());
 
-    if (e.target.value.trim().length == 0) {
+    if (e.target.value.trim().length === 0) {
       setLastNameError("Please enter your last name");
     }
     else if (e.target.value.trim().length < 4) {
@@ -86,7 +88,7 @@ const Signup = () => {
   const validatePassword = (e) => {
     setPassword(e.target.value);
 
-    if (e.target.value.trim().length == 0) {
+    if (e.target.value.trim().length === 0) {
       setPasswordError("");
     }
     else if (validator.isStrongPassword(e.target.value)) {
@@ -101,7 +103,7 @@ const Signup = () => {
   const validateEmail = (e) => {
     setEmail(e.target.value);
 
-    if (e.target.value.trim().length == 0) {
+    if (e.target.value.trim().length === 0) {
       setEmailError("");
     }
     else if (validator.isEmail(e.target.value)) {
@@ -121,13 +123,47 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-      userType: data.get('row-radio-buttons-group')
-    });
+    const formData = {
+        firstName: data.get('firstName'),
+        lastName: data.get('lastName'),
+        email: data.get('email'),
+        password: data.get('password'),
+        userType: data.get('row-radio-buttons-group')
+      };
+
+
+    axios.post(`http://localhost:5000/register`,formData,{
+      headers: {
+        'Content-Type': 'application/json', // Set the appropriate content type
+      },
+    })
+    .then(res=>{
+      const userData = res.data;
+    if(userData && res.status === 201){
+        toast.success('🦄 User registered successfully', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }
+    }).catch(error=>{
+      toast.warning('🦄 User Already Exist!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    })
+
   };
 
 

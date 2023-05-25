@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
-export const connectDatabase = () => {
-  mongoose
-    .connect(``)
-    .then((c) => {
-        console.log("Connected to database");
-    })
-    .catch((e) => {
-        console.log(e);
-    });
-};
+export async function connectDatabase() {
+  try {
+    await mongoose.connect("mongodb+srv://pratham266:bookart@bookart.rexl0we.mongodb.net/");
+    console.log("Connected to the database");
+  } catch (error) {
+    console.error("Database connection error:", error);
+  }
+}
