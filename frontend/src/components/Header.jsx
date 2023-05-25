@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Header.css";
+import { NavLink } from "react-router-dom";
 const Header = () => {
-  
   const [isOpen, setIsOpen] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(true);
 
@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="w-full min-h-screen text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
+      <div className="w-full  text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
         <nav className="flex justify-between items-center py-8 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24">
           <button onClick={toggleMenu} className="sidebar-open block md:hidden relative z-30 focus:outline-none transform  -translate-x-1/2 -translate-y-1/2 active:scale-75 transition-transform">
             <svg
@@ -42,29 +42,29 @@ const Header = () => {
               />
             </svg>
           </button>
-          <a href=" " className="text-3xl md:text-4xl font-bold tracking-wide">
+          <a to=" " className="text-3xl md:text-4xl font-bold tracking-wide">
             Book<span className="text-yellow-500">Art</span>
           </a>
           <div className={`${isOpen ?"hidden": "block"} menu-resposive fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 `}>
             <ul className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
               <li className="text-lg md:text-base lg:text-lg font-medium group text-yellow-500">
-                <a href="/">Home</a>
+                <NavLink to="/">Home</NavLink>
                 <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
               </li>
               <li className="text-lg md:text-base lg:text-lg font-medium group">
-                <a href="/">Books</a>
+                <NavLink to="/book">Books</NavLink>
                 <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
               </li>
               <li className="text-lg md:text-base lg:text-lg font-medium group">
-                <a href="/">About Us</a>
+                <NavLink to="/about">About Us</NavLink>
                 <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
               </li>
               <li className="text-lg md:text-base lg:text-lg font-medium group">
-                <a href="/">Contact Us</a>
+                <NavLink to="/login">Login</NavLink>
                 <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
               </li>
               <li className="text-lg md:text-base lg:text-lg font-medium group">
-                <a href="/">Blog</a>
+                <NavLink to="/signup">Signup</NavLink>
                 <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
               </li>
             </ul>
