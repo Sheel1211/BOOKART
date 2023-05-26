@@ -23,24 +23,24 @@ const userSchema = new mongoose.Schema({
     validate: [validator.isEmail, "Enter a valid Email Address"],
     unique: true,
   },
-  password: {
-    type: String,
-    required: [true, "Please Enter your Password"],
-    select: false,
-    validate: {
-      validator: function (password) {
-        // Regular expression for password validation
-        //Password must contain one uppercase letter, one lowercase letter, one number and one special character
-        const passwordRegex =
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
-        return passwordRegex.test(password);
+    password: {
+      type: String,
+      required: [true, "Please Enter your Password"],
+      select: false,
+      validate: {
+        validator: function (password) {
+          // Regular expression for password validation
+          //Password must contain one uppercase letter, one lowercase letter, one number and one special character
+          const passwordRegex =
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+          return passwordRegex.test(password);
 
-        //Yes, that's correct! Positive lookaheads (?= )allow us to check if a pattern is present at any position in the string without consuming any characters. It can be used to validate the presence of a character or pattern at the beginning, end, or anywhere within the string.
+          //Yes, that's correct! Positive lookaheads (?= )allow us to check if a pattern is present at any position in the string without consuming any characters. It can be used to validate the presence of a character or pattern at the beginning, end, or anywhere within the string.
+        },
+        message:
+          "The password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and must be at least 8 characters long.",
       },
-      message:
-        "The password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and must be at least 8 characters long.",
     },
-  },
   userType: {
     type: String,
     default: "user",
@@ -58,10 +58,11 @@ userSchema.pre("save", async function (next) {
 
 //JWT Token
 userSchema.methods.getJWTToken = function () {
-  return jwt.sign({ id: this._id }, "BOOKARTBOOKARTBOOKARTBOOKARTBOOKARTBOOKARTBOOKARTBOOKART", {
+  let token = jwt.sign({ id: this._id }, "BOOKARTBOOKARTBOOKARTBOOKARTBOOKARTBOOKARTBOOKARTBOOKART", {
     expiresIn: 3600,
   });
-};
+  return token;
+};  
 
 //Compare Password
 userSchema.methods.comparePassword = async function (enteredPassword) {

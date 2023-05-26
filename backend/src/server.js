@@ -3,10 +3,8 @@ import {app} from "./app.js";
 import dotenv from "dotenv";
 
 import { connectDatabase } from "../config/database.js";
-// dotenv.config({
-    //     path:"./config/config.env"
-    // })
-    
+dotenv.config({path:"../config.env"})
+
 connectDatabase();
 
 app.listen(5000,()=>{

@@ -13,11 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
+import {toast} from 'react-toastify';
 import validator from 'validator';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import axios from 'axios';
 
 
 function Copyright(props) {
@@ -83,11 +85,51 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const formData = {
       email: data.get('email'),
       password: data.get('password'),
-      category: data.get('row-radio-buttons-group')
-    });
+    };
+    axios.post(`http://localhost:5000/login`,formData,{
+      headers:{'Content-Type': 'application/json'},
+      credentials: 'include',
+    }).then(res=>{
+      const resData = res.data;
+      console.log(resData);
+      if(res.data && res.status===200){
+        toast.success('🦄Successful Login', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }else{
+        toast.warning('🦄Invalid Credentials!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }
+    }).catch(error=>{
+      toast.error('🦄Something went wrong!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    })
   };
 
 
@@ -149,20 +191,6 @@ const Login = () => {
               autoComplete="current-password"
               onChange={validatePassword}
             />
-            <div className='text-center'>
-              <FormControl>
-                {/* <FormLabel id="demo-row-radio-buttons-group-label"></FormLabel> */}
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  onChange={handleSelect}
-                >
-                  <FormControlLabel value="buyer" control={<Radio />} label="Buyer" />
-                  <FormControlLabel value="seller" control={<Radio />} label="Seller" />
-                </RadioGroup>
-              </FormControl>
-            </div>
             <Button
               type="submit"
               fullWidth
@@ -170,8 +198,7 @@ const Login = () => {
               sx={{ mt: 3, mb: 2 }}
               disabled={
                 emailError === "Valid Email" &&
-                  passwordError === "Strong Password" &&
-                  category !== ""
+                  passwordError === "Strong Password" 
                   ? false : true
               }
             >
