@@ -21,7 +21,7 @@ const Home = () => {
   {/* Container for demo purpose */}
   <div className="container w-100 h-100 px-6 mx-auto">
     {/* Section: Design Block */}
-    <section className="mb-32">
+    {/* <section className="mb-32"> */}
       <div
         className="relative overflow-hidden bg-no-repeat bg-cover"
         style={{
@@ -56,7 +56,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </section>
+    {/* </section> */}
     {/* Section: Design Block */}
   </div>
   {/* Container for demo purpose */}
