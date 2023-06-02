@@ -60,6 +60,7 @@ app.post("/register",async(req,res)=>{
 })
 
 
+//login route of the user
 app.post("/login", async (req, res) => {
     try {
       const { email, password } = req.body;

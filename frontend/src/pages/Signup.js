@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import validator from 'validator';
 import Radio from '@mui/material/Radio';
@@ -53,6 +53,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState("")
   const [lastNameError, setLastNameError] = useState("")
   const [userType, setuserType] = useState("")
+  const navigate = useNavigate();
 
 
   const validateFirstName = (e) => {
@@ -150,6 +151,7 @@ const Signup = () => {
           progress: undefined,
           theme: "light",
           });
+          navigate('/login')
       }
     }).catch(error=>{
       toast.warning('🦄 User Already Exist!', {

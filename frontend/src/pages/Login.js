@@ -12,7 +12,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import validator from 'validator';
 import Radio from '@mui/material/Radio';
@@ -47,6 +47,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("")
   const [category, setCategory] = useState("")
   const [categoryError, setCategoryError] = useState("")
+  const navigate = useNavigate();
 
   const validatePassword = (e) => {
     setPassword(e.target.value);
@@ -106,6 +107,7 @@ const Login = () => {
           progress: undefined,
           theme: "light",
           });
+          navigate('/')
       }else{
         toast.warning('🦄Invalid Credentials!', {
           position: "top-right",
