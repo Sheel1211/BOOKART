@@ -1,10 +1,15 @@
 import mongoose from "mongoose";
 
-export async function connectDatabase() {
-  try {
-    await mongoose.connect(`mongodb+srv://pratham266:bookart@bookart.rexl0we.mongodb.net/`);
-    console.log(`Connected to the database BookArt`);
-  } catch (error) {
-    console.error("Database connection error:", error);
-  }
+// export async function connectDatabase() {
+//   mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+//     console.log("Connected to database ")
+//   }).catch((e) => {
+//     console.log(e);
+//   });
+// }
+
+export async function connectDB(url) {
+  return mongoose.connect(url).then(() => {
+    console.log("Connected to database...");
+  })
 }

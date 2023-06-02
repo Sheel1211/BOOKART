@@ -123,48 +123,58 @@ const Signup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+
+    const roleId = userType === "buyer" ? "2" : "1";
+
     const formData = {
-        firstName: data.get('firstName'),
-        lastName: data.get('lastName'),
-        email: data.get('email'),
-        password: data.get('password'),
-        userType: data.get('row-radio-buttons-group')
-      };
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      roleId
+    };
 
 
-    axios.post(`http://localhost:5000/register`,formData,{
-      headers: {
-        'Content-Type': 'application/json', // Set the appropriate content type
-      },
-    })
-    .then(res=>{
-      const userData = res.data;
-    if(userData && res.status === 201){
-        toast.success('🦄 User registered successfully', {
+    axios.post(`https://book-e-sell-node-api.vercel.app/api/user/`, formData)
+      .then(res => {
+        setFirstName("");
+        setLastName("");
+        setuserType("");
+        setEmail("");
+        setPassword("");
+
+        console.log(res)
+        if (res.data.code === 200) {
+
+
+          toast.success('🦄 User registered successfully', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+
+          navigate("/login");
+
+
+
+        }
+      }).catch(error => {
+        toast.warning('🦄 User Already Exist!', {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
-          navigate('/login')
-      }
-    }).catch(error=>{
-      toast.warning('🦄 User Already Exist!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
         });
-    })
+      })
 
   };
 
@@ -280,8 +290,8 @@ const Signup = () => {
                     name="row-radio-buttons-group"
                     onChange={handleSelect}
                   >
-                    <FormControlLabel value="buyer" control={<Radio />} label="Buyer" />
-                    <FormControlLabel value="seller" control={<Radio />} label="Seller" />
+                    <FormControlLabel value="buyer" control={<Radio />} label="Seller" />
+                    <FormControlLabel value="seller" control={<Radio />} label="Buyer" />
                   </RadioGroup>
                 </FormControl>
               </Grid>
