@@ -157,11 +157,8 @@ const Signup = () => {
             progress: undefined,
             theme: "light",
           });
-
+          
           navigate("/login");
-
-
-
         }
       }).catch(error => {
         toast.warning('🦄 User Already Exist!', {
