@@ -31,10 +31,6 @@ const Header = () => {
     setUserId,
     role
   } = React.useContext(UserContext);
-
-
-  console.log(userId,role);
-
   return (
     <>
       <div className="w-full text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
