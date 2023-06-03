@@ -121,6 +121,7 @@ const Books = ({ sortType }) => {
               <>
                 {allBooks &&
                   allBooks.map((book, index) => {
+                    
                     return <Book book={book} key={index} />;
                   })}
               </>

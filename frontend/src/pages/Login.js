@@ -83,7 +83,7 @@ const Login = () => {
   };
 
   // console.log(email, password);
-  const { firstName, setFirstName, lastName, setLastName, userEmail, setUserEmail, role, setRole, userId, setUserId } = React.useContext(UserContext);
+  const { firstName, setFirstName, lastName, setLastName, userEmail, setUserEmail, role, setRole, userId, setUserId ,setId} = React.useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -113,6 +113,7 @@ const Login = () => {
           setLastName(res.data.result.lastName);
           setUserEmail(res.data.result.email);
           setRole(res.data.result.role);
+          setId(res.data.result.id);
           navigate("/")
 
         } else {

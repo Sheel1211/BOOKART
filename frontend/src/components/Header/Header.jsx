@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="w-full  text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
+      <div className="w-full text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
         <nav className="flex justify-between p-5 items-center mx-auto max-w-screen-xl">
           <button
             onClick={toggleMenu}

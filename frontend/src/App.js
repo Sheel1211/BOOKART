@@ -21,6 +21,7 @@ function App() {
   const [lastName, setLastName] = useState("");
 
   // buyer or seller
+  const [id,setId] = useState(null);
   const [role, setRole] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userId, setUserId] = useState("");
@@ -43,6 +44,8 @@ function App() {
             setRole,
             userId,
             setUserId,
+            id,
+            setId
           }}
         >
           <ProductContext.Provider
