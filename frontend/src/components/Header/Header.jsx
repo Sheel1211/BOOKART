@@ -6,7 +6,7 @@ import { ProductContext } from "../../ProductContext";
 import axios from "axios";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(true);
   const [query, setQuery] = useState("");
 
@@ -92,9 +92,9 @@ const Header = () => {
           <div
             className={`${
               isOpen ? "hidden" : "block"
-            } menu-resposive fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 `}
+            } menu-resposive fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-row sm:flex-col md:space-x-8 -mt-56 md:mt-0 `}
           >
-            <ul className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
+            <ul className="flex md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
               <li className="text-lg md:text-base lg:text-lg font-medium group text-yellow-500">
                 <NavLink to="/">Home</NavLink>
                 <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
