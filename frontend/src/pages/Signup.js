@@ -158,15 +158,7 @@ const Signup = () => {
             progress: undefined,
             theme: "light",
           });
-
-<<<<<<< Updated upstream
-          navigate("/");
-
-
-
-=======
           navigate("/login");
->>>>>>> Stashed changes
         }
       }).catch(error => {
         toast.warning('🦄 User Already Exist!', {

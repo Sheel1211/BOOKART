@@ -83,11 +83,7 @@ const Login = () => {
   };
 
   // console.log(email, password);
-<<<<<<< Updated upstream
-  const { firstName, setFirstName, lastName, setLastName, userEmail, setUserEmail, role, setRole, userId, setUserId } = React.useContext(UserContext);
-=======
   const { firstName, setFirstName, lastName, setLastName, userEmail, setUserEmail, role, setRole, userId, setUserId, setId } = React.useContext(UserContext);
->>>>>>> Stashed changes
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {

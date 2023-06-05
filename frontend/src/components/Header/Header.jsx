@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import { ProductContext } from "../../ProductContext";
 import axios from "axios";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(true);
   const [query, setQuery] = useState("");
 
@@ -29,18 +29,11 @@ const Header = () => {
     setType,
     userId,
     setUserId,
-<<<<<<< Updated upstream
-=======
     role,
->>>>>>> Stashed changes
   } = React.useContext(UserContext);
-
-
-  console.log(userId);
-
   return (
     <>
-      <div className="w-full  text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
+      <div className="w-full text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
         <nav className="flex justify-between p-5 items-center mx-auto max-w-screen-xl">
           <button
             onClick={toggleMenu}
@@ -71,10 +64,9 @@ const Header = () => {
               />
             </svg>
           </button>
-          <a to=" " className="text-3xl md:text-4xl font-bold tracking-wide">
+          <Link to=" " className="text-3xl md:text-4xl font-bold tracking-wide">
             Book<span className="text-yellow-500">Art</span>
-<<<<<<< Updated upstream
-          </a>
+          </Link>
           <div className="flex items-center justify-center">
             <form className="flex border-2 rounded">
               <input
@@ -91,39 +83,18 @@ const Header = () => {
                   fill="currentColor"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-=======
-          </Link>
-          {role !== "seller" && (
-            <div className="flex items-center justify-center">
-              <form className="flex border-2 rounded">
-                <input
-                  type="text"
-                  className="px-4 py-2 w-80"
-                  placeholder="Search..."
-                />
-                <button
-                  type="submit"
-                  className="flex items-center justify-center px-4 border-l"
->>>>>>> Stashed changes
                 >
-                  <svg
-                    className="w-6 h-6 text-gray-600"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
-                  </svg>
-                </button>
-              </form>
-            </div>
-          )}
+                  <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                </svg>
+              </button>
+            </form>
+          </div>
           <div
             className={`${
               isOpen ? "hidden" : "block"
-            } menu-resposive fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 `}
+            } menu-resposive fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-row sm:flex-col md:space-x-8 -mt-56 md:mt-0 `}
           >
-            <ul className="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
+            <ul className="flex md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
               <li className="text-lg md:text-base lg:text-lg font-medium group text-yellow-500">
                 <NavLink to="/">Home</NavLink>
                 <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
@@ -144,32 +115,21 @@ const Header = () => {
                   </li>
                 </>
               )}
-<<<<<<< Updated upstream
-              {userId && (
-=======
               {userId && role == "seller" && (
->>>>>>> Stashed changes
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/addBook">Add Book</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
-<<<<<<< Updated upstream
-              {userId && (
-                <li className="text-lg md:text-base lg:text-lg font-medium group">
-                  <NavLink to="/profile">Profile</NavLink>
-=======
               {userId && role == "buyer" && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/mycart">MyCart</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
-
               {userId && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/logout">Logout</NavLink>
->>>>>>> Stashed changes
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
