@@ -9,7 +9,7 @@ import Book from "./pages/Book";
 import PageNotFound from "./pages/PageNotFound";
 import AddBook from "./pages/AddBook";
 import { UserContext } from "./UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductContext } from "./ProductContext";
 import Footer from "./pages/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
@@ -30,6 +30,15 @@ function App() {
   console.log("role", role);
   const [allBooks, setAllBooks] = useState(null);
   const [searchedBooks, setSearchedBooks] = useState(null);
+
+  useEffect(() => {
+    setUserId(localStorage.getItem("userId"));
+    setFirstName(localStorage.getItem("firstName"));
+    setLastName(localStorage.getItem("lastName"));
+    setUserEmail(localStorage.getItem("email"));
+    setRole(localStorage.getItem("role"));
+    setId(localStorage.getItem("Id"));
+  }, [])
 
   return (
     <>

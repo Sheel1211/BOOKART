@@ -109,6 +109,13 @@ const Login = () => {
             theme: "light",
           });
 
+          localStorage.setItem("userId", res.data.result._id);
+          localStorage.setItem("firstName", res.data.result.firstName);
+          localStorage.setItem("lastName", res.data.result.lastName);
+          localStorage.setItem("email", res.data.result.email);
+          localStorage.setItem("role", res.data.result.role);
+          localStorage.setItem("Id", res.data.result.id);
+
           setUserId(res.data.result._id);
           setFirstName(res.data.result.firstName);
           setLastName(res.data.result.lastName);
