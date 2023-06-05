@@ -83,7 +83,11 @@ const Login = () => {
   };
 
   // console.log(email, password);
+<<<<<<< Updated upstream
   const { firstName, setFirstName, lastName, setLastName, userEmail, setUserEmail, role, setRole, userId, setUserId } = React.useContext(UserContext);
+=======
+  const { firstName, setFirstName, lastName, setLastName, userEmail, setUserEmail, role, setRole, userId, setUserId, setId } = React.useContext(UserContext);
+>>>>>>> Stashed changes
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -107,6 +111,14 @@ const Login = () => {
             progress: undefined,
             theme: "light",
           });
+
+
+          localStorage.setItem("userId", res.data.result._id);
+          localStorage.setItem("firstName", res.data.result.firstName);
+          localStorage.setItem("lastName", res.data.result.lastName);
+          localStorage.setItem("email", res.data.result.email);
+          localStorage.setItem("role", res.data.result.role);
+          localStorage.setItem("Id", res.data.result.id);
 
           setUserId(res.data.result._id);
           setFirstName(res.data.result.firstName);
