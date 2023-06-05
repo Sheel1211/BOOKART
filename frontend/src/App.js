@@ -15,6 +15,8 @@ import Footer from "./pages/Footer/Footer";
 import Profile from "./pages/Profile/Profile";
 import Logout from "./pages/Logout";
 import Cart from "./pages/Cart";
+import Admin from "./pages/Admin.js";
+import Users from "./pages/Users.js";
 
 function App() {
   const [firstName, setFirstName] = useState("");
@@ -64,6 +66,8 @@ function App() {
                 <Route exact path="/mycart" element={!userId?<Login />:<Cart />} />
                 <Route exact path="*" element={<PageNotFound />} />
                 <Route exact path="/logout" element={<Logout />} />
+                <Route exact path="/admin" element={<Admin />} />
+                <Route exact path="/users" element={<Users />} />
               </Routes>
               <Footer />
             </Router>

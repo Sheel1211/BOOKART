@@ -55,15 +55,15 @@ const Login = () => {
   const validatePassword = (e) => {
     setPassword(e.target.value);
 
-    if (e.target.value.trim().length == 0) {
-      setPasswordError("");
-    } else if (validator.isStrongPassword(e.target.value)) {
+    // if (e.target.value.trim().length == 0) {
+    //   setPasswordError("");
+    // } else if (validator.isStrongPassword(e.target.value)) {
       setPasswordError("Strong Password");
-    } else {
-      setPasswordError(
-        "Passwords must have at least 8 characters and contain the following: uppercase letters, lowercase letters, numbers, and symbols*"
-      );
-    }
+    // } else {
+    //   setPasswordError(
+    //     "Passwords must have at least 8 characters and contain the following: uppercase letters, lowercase letters, numbers, and symbols*"
+    //   );
+    // }
   };
 
   const validateEmail = (e) => {
@@ -114,7 +114,10 @@ const Login = () => {
           setUserEmail(res.data.result.email);
           setRole(res.data.result.role);
           setId(res.data.result.id);
-          navigate("/")
+
+          // console.log("The role is " + res.data.result.role);
+          {res.data.result.role=="admin" ?navigate("/admin"):navigate("/")}
+          // navigate("/")
 
         } else {
           toast.warning("🦄Invalid Credentials!", {
@@ -130,7 +133,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        toast.error("🦄Something went wrong!", {
+        toast.error(error.response.data.message, {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
