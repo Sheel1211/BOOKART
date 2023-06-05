@@ -1,6 +1,8 @@
 import { Pagination } from "@mui/material";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import { deleteProduct, editProduct, getAllProducts, getFeaturedProducts, getMaxProducts, getMinProducts } from "../actions/product";
 import { ProductContext } from "../ProductContext";
 import { UserContext } from "../UserContext";
@@ -17,52 +19,127 @@ const Users = () => {
   const [role, setRole] = useState();
   const [pageIndex, setPageIndex] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const [users, setUsers] = useState([]);
+  const getAllUsers = async () => {
+    try {
+      const response = await axios.get(
+        `https://book-e-sell-node-api.vercel.app/api/user?pageSize=8&pageIndex=${pageIndex}`
+      );
+      setTotalPage(response.data.result.totalPages);
+      setUsers(response.data.result.items);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getAllUsers();
+  }, [pageIndex]);
 
-  //   const { userId ,role } = useContext(UserContext);
-
-  const setUser =(item)=>{
-    setId(item.id);
-    setFirstName(item.firstName)
-    setLastName(item.lastName)
-    setEmail(item.email)
-    setPassword(item.password)
-  }
   const handleSubmit = async (e) => {
     e.preventDefault();
-  };
-  useEffect(() => {
-    axios
-      .get(
-        "https://book-e-sell-node-api.vercel.app/api/user?pageSize=8&pageIndex=" +
-          pageIndex
-      )
-      .then((res) => {
-        console.log(res);
-        setTotalPage(res.data.result.totalPages);
-        setProducts(res.data.result.items);
-        // setDefaultBooks(res.data.result.items);
+
+    const formData = {
+      id,
+      firstName,
+      lastName,
+      email,
+      roleId,
+      password,
+      role,
+    };
+
+    try {
+      const response = await axios.put(
+        "https://book-e-sell-node-api.vercel.app/api/user",
+        formData
+      );
+      console.log(formData);
+      // console.log(response.status);  
+      if (response.status == 200) {
+        toast.success("🦄 User Updated successfully", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setShowModal(false);
+        Navigate("/admin/users");
+      }
+    } catch (error) {
+      // console.log(error.message);
+      toast.warning(error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
-  }, []);
+    }
+
+    getAllUsers();
+  };
 
   const handlePageChange = (e, page) => {
     setPageIndex(page);
-    axios
-      .get(
-        "https://book-e-sell-node-api.vercel.app/api/user?pageSize=8&pageIndex=" +
-          page
-      )
-      .then((res) => {
-        console.log(res);
-        setProducts(res.data.result.items);
-        // setDefaultBooks(res.data.result.items);
-      });
   };
 
-  const deleteHandler = async (id) => {};
+  const deleteHandler = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://book-e-sell-node-api.vercel.app/api/user?id=${id}`
+      );
+      if (response.data.code === 200) {
+        toast.success("🦄 User deleted successfully", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
 
-  console.log("Hello ");
+        Navigate("/admin/users");
+      }
+    } catch (error) {
+      toast.warning(error, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+
+    getAllUsers();
+  };
+
+  const handleEdit = (user) => {
+    setId(user.id);
+    setRoleId(user.roleId);
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setEmail(user.email);
+    setPassword(user.password);
+    setRole(user.role);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <>
       <div className="flex flex-col">
@@ -123,8 +200,8 @@ const Users = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {Array.isArray(products)
-                    ? products.map((item, index) => (
+                  {Array.isArray(users)
+                    ? users.map((item, index) => (
                         <tr key={index}>
                           <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                             {item.id}
@@ -148,10 +225,11 @@ const Users = () => {
                             className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap text-green-500 hover:text-green-700"
                             onClick={async () => {
                               setShowModal(true);
-                              setUser(item);
+                              handleEdit(item);
 
                               
                             }}
+                            style={{cursor:"pointer"}}
                           >
                             Edit
                           </td>
@@ -169,8 +247,9 @@ const Users = () => {
                                       <button
                                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                                         onClick={() => setShowModal(false)}
+                                        style={{color:"black"}}
                                       >
-                                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none" style={{color:"black"}}>
                                           ×
                                         </span>
                                       </button>
@@ -189,6 +268,7 @@ const Users = () => {
                                             onChange={(e) => {
                                               setId(e.target.value);
                                               setRoleId(item.roleId);
+                                              setRole(e.target.role);
                                             }}
                                             value={item.id}
                                             required
@@ -280,7 +360,7 @@ const Users = () => {
                                               type="text"
                                               name="role"
                                               id="role"
-                                              value={role}
+                                              value={item.role}
                                               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                               placeholder=" "
                                               onChange={(e) =>
@@ -321,7 +401,8 @@ const Users = () => {
 
                           <td
                             className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap text-red-500 hover:text-red-700"
-                            onClick={() => deleteHandler(item._id)}
+                            onClick={() => deleteHandler(item.id)}
+                            style={{cursor:"pointer"}}
                           >
                             Delete
                           </td>

@@ -19,7 +19,7 @@ const Book = (props) => {
   const [quantity,setQuantity] = useState(1);
   
 
-  const hadleAddToCart =()=>{
+  const handleAddToCart =()=>{
     console.log("user",user);
     axios.post(`https://book-e-sell-node-api.vercel.app/api/cart/`, {bookId:id,userId:user.id,quantity:quantity})
     .then(res => {
@@ -72,7 +72,7 @@ const Book = (props) => {
                 <input class="h-8 w-8 border bg-white text-center text-xs outline-none" type="number" value={quantity} min="1"/>
                 <button  onClick={()=>setQuantity(quantity+1)} class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"> + </button>
               </div>
-        <button onClick={hadleAddToCart} className="ml-2  p-1.5 transition ease-in duration-200 rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">Add
+        <button onClick={handleAddToCart} className="ml-2  p-1.5 transition ease-in duration-200 rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">Add
             to cart
             </button>
             </div>
