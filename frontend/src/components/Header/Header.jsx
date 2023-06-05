@@ -137,7 +137,7 @@ const Header = () => {
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
-              {userId && role=="admin" && (
+              {userId && userEmail=="sheel@admin.com" && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/users">Users</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>

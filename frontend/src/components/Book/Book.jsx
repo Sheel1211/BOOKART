@@ -15,14 +15,16 @@ const Book = (props) => {
   const user = useContext(UserContext);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const { _id, id, name, author, category, description, price, base64image } =
+  console.log(props.book);
+  const { _id, id, name, author, category,categoryId, description, price, base64image } =
     props.book;
   const [quantity, setQuantity] = useState(1);
 
   const [bookId,setBookId]=useState(id);
   const [bookName,setBookName]=useState(name);
   const [bookAuthor,setBookAuthor]=useState(author);
-  const [bookCategory,setBookCategory]=useState(category);
+  const [bookCategory,setBookCategory]=useState(categoryId);
+  const [bookCategoryName,setBookCategoryName]=useState(category);
   const [bookDescription,setBookDescription]=useState(description);
   const [bookPrice,setBookPrice]=useState(price);
   // const [bookImage,setBookImage]
@@ -70,13 +72,12 @@ const Book = (props) => {
     e.preventDefault();
 
     const formData = {
-      id,
+      id:id,
       name:bookName,
       description:bookDescription,
       price:bookPrice,
       categoryId:bookCategory,
-      base64image,
-      
+      base64image,      
     };
 
     try {
@@ -198,7 +199,7 @@ const Book = (props) => {
             </div>
           </>
         )}
-        {user.userId && user.role === "admin" && (
+        {user.userId && user.userEmail === "sheel@admin.com" && (
           <>
             <div className="flex justify-center">
               <button
