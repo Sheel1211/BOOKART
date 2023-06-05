@@ -3,9 +3,6 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { deleteProduct, editProduct, getAllProducts, getFeaturedProducts, getMaxProducts, getMinProducts } from "../actions/product";
-import { ProductContext } from "../ProductContext";
-import { UserContext } from "../UserContext";
 
 const Users = () => {
   const [showModal, setShowModal] = useState(false);
@@ -226,7 +223,6 @@ const Users = () => {
                             onClick={async () => {
                               setShowModal(true);
                               handleEdit(item);
-
                               
                             }}
                             style={{cursor:"pointer"}}

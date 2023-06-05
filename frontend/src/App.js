@@ -64,10 +64,10 @@ function App() {
                 <Route exact path="/addBook" element={!userId?<Login />:<AddBook />} />
                 <Route exact path="/profile" element={!userId?<Login />:<Profile />} />
                 <Route exact path="/mycart" element={!userId?<Login />:<Cart />} />
-                <Route exact path="*" element={<PageNotFound />} />
                 <Route exact path="/logout" element={<Logout />} />
                 <Route exact path="/admin" element={<Admin />} />
                 <Route exact path="/users" element={<Users />} />
+                <Route exact path="*" element={<PageNotFound />} />
               </Routes>
               <Footer />
             </Router>

@@ -92,6 +92,7 @@ const Login = () => {
       email: email,
       password: password,
     };
+    console.log(formData);
     await axios
       .post('https://book-e-sell-node-api.vercel.app/api/user/login', formData)
       .then((res) => {
@@ -133,6 +134,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
+        console.log(error);
         toast.error(error.response.data.message, {
           position: "top-right",
           autoClose: 2000,
