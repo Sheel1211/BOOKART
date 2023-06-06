@@ -51,7 +51,7 @@ const AddBook = () => {
 
   const addProduct = (e) => {
     e.preventDefault();
-    const data = { name, description, price, categoryId: 4, base64image: imageURL, }
+    const data = { name, description, price, categoryId: 6, base64image: imageURL, }
 
     console.log("HI");
     axios.post("https://book-e-sell-node-api.vercel.app/api/book", data).then((res) => {
