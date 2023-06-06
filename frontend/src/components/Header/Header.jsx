@@ -6,7 +6,7 @@ import { ProductContext } from "../../ProductContext";
 import axios from "axios";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(true);
   const [query, setQuery] = useState("");
 
@@ -29,13 +29,13 @@ const Header = () => {
     setType,
     userId,
     setUserId,
-    role
+    role,
   } = React.useContext(UserContext);
   return (
     <>
       <div className="w-full text-gray-900 bg-gradient-to-br from-transparent to-yellow-100">
         <nav className="flex justify-between p-5 items-center mx-auto max-w-screen-xl">
-          <button
+          {/* <button
             onClick={toggleMenu}
             className="sidebar-open block md:hidden relative z-30 focus:outline-none transform  -translate-x-1/2 -translate-y-1/2 active:scale-75 transition-transform"
           >
@@ -63,7 +63,7 @@ const Header = () => {
                 clipRule="evenodd"
               />
             </svg>
-          </button>
+          </button> */}
           <Link to=" " className="text-3xl md:text-4xl font-bold tracking-wide">
             Book<span className="text-yellow-500">Art</span>
           </Link>
@@ -89,11 +89,7 @@ const Header = () => {
               </button>
             </form>
           </div>
-          <div
-            className={`${
-              isOpen ? "hidden" : "block"
-            } menu-responsive fixed flex inset-0 transition-all bg-white/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 `}
-          >
+          <div>
             <ul className="flex flex-row md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
               <li className="text-lg md:text-base lg:text-lg font-medium group text-yellow-500">
                 <NavLink to="/">Home</NavLink>
@@ -119,32 +115,32 @@ const Header = () => {
                   </li>
                 </>
               )}
-              {userId && role=="seller" && (
+              {userId && role == "seller" && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/addBook">Add Book</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
-              {userId && role=="seller" &&(
+              {userId && role == "seller" && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/profile">Profile</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
-              {userId && role=="buyer" && (
+              {userId && role == "buyer" && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/mycart">MyCart</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
-              {userId && userEmail=="sheel@admin.com" && (
+              {userId && userEmail == "sheel@admin.com" && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/users">Users</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>
                 </li>
               )}
-             
-             {userId && (
+
+              {userId && (
                 <li className="text-lg md:text-base lg:text-lg font-medium group">
                   <NavLink to="/logout">Logout</NavLink>
                   <div className="h-0.5 bg-yellow-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out"></div>

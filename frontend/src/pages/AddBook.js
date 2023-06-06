@@ -23,13 +23,13 @@ const AddBook = () => {
 
 
   const [name, setName] = useState("");
-  const [author, setAuthor] = useState("")
+  // const [author, setAuthor] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState(0);
-  const [available, setAvailable] = useState(false);
-  const [stock, setStock] = useState(0);
+  // const [available, setAvailable] = useState(false);
+  // const [stock, setStock] = useState(0);
   const [imageURL, setImageURL] = useState("")
-  const [category, setCategory] = useState("")
+  // const [category, setCategory] = useState("")
   const navigate = useNavigate();
   useEffect(() => {
     if (!userId) {
@@ -51,11 +51,13 @@ const AddBook = () => {
 
   const addProduct = (e) => {
     e.preventDefault();
-    const data = { name, author, description, price, available, stock, image: imageURL, category, user: userId }
+    const data = { name, description, price, categoryId: 4, base64image: imageURL, }
 
-    axios.post("http://localhost:8000/addBook", data).then((res) => {
+    console.log("HI");
+    axios.post("https://book-e-sell-node-api.vercel.app/api/book", data).then((res) => {
       console.log(res);
     })
+
   }
 
 
@@ -82,7 +84,7 @@ const AddBook = () => {
           variant="outlined"
           name="name"
         />
-        <FormLabel>Author</FormLabel>
+        {/* <FormLabel>Author</FormLabel>
         <TextField
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
@@ -90,7 +92,7 @@ const AddBook = () => {
           fullWidth
           variant="outlined"
           name="author"
-        />
+        /> */}
         <FormLabel>Description</FormLabel>
         <TextField
           value={description}
@@ -119,7 +121,7 @@ const AddBook = () => {
           variant="outlined"
           name="image"
         />
-        <FormLabel>Stock</FormLabel>
+        {/* <FormLabel>Stock</FormLabel>
         <TextField
           value={stock}
           onChange={(e) => setStock(e.target.value)}
@@ -127,8 +129,8 @@ const AddBook = () => {
           fullWidth
           variant="outlined"
           name="stock"
-        />
-        <FormLabel>Category</FormLabel>
+        /> */}
+        {/* <FormLabel>Category</FormLabel>
         <TextField
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -136,13 +138,13 @@ const AddBook = () => {
           fullWidth
           variant="outlined"
           name="category"
-        />
-        <FormControlLabel
+        /> */}
+        {/* <FormControlLabel
           control={
             <Checkbox checked={available} onChange={() => setAvailable(!available)} />
           }
           label="Available"
-        />
+        /> */}
 
         <Button variant="contained" type="submit">
           Add Book
