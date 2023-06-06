@@ -15,7 +15,7 @@ const Book = (props) => {
   const user = useContext(UserContext);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  console.log(props.book);
+  // console.log(props.book);
   const { _id, id, name, author, category,categoryId, description, price, base64image } =
     props.book;
   const [quantity, setQuantity] = useState(1);
@@ -31,7 +31,7 @@ const Book = (props) => {
 
 
   const handleAddToCart = () => {
-    console.log("user", user);
+    // console.log("user", user);
     axios
       .post(`https://book-e-sell-node-api.vercel.app/api/cart/`, {
         bookId: id,
@@ -199,7 +199,7 @@ const Book = (props) => {
             </div>
           </>
         )}
-        {user.userId && user.userEmail === "sheel@admin.com" && (
+        {user.userId && user.role === "admin" && (
           <>
             <div className="flex justify-center">
               <button

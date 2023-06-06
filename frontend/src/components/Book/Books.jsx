@@ -70,7 +70,7 @@ const Books = ({ sortType }) => {
           pageIndex
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setTotalPage(res.data.result.totalPages);
         setAllBooks(res.data.result.items);
         setDefaultBooks(res.data.result.items);
@@ -85,7 +85,7 @@ const Books = ({ sortType }) => {
           page
       )
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setAllBooks(res.data.result.items);
         setDefaultBooks(res.data.result.items);
       });

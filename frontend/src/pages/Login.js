@@ -124,7 +124,7 @@ const Login = () => {
           setId(res.data.result.id);
 
           // console.log("The role is " + res.data.result.role);
-          {res.data.result.email=="sheel@admin.com" ?navigate("/admin"):navigate("/")}
+          {res.data.result.role=="admin" ?navigate("/admin"):navigate("/")}
           // navigate("/")
 
         } else {
